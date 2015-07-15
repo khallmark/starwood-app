@@ -23,34 +23,6 @@ var app = {
 	// function, we must explicitly call 'app.receivedEvent(...);'
 	onDeviceReady: function() {
 		app.receivedEvent('deviceready');
-
-
-		angular.module('contacts', ['ngRoute'])
-			.config(function ($routeProvider) {
-				'use strict';
-
-				var routeConfig = {
-					controller: 'ContactCtrl',
-					templateUrl: 'todomvc-index.html',
-					resolve: {
-						store: function (todoStorage) {
-							// Get the correct module (API or localStorage).
-							return todoStorage.then(function (module) {
-								module.get(); // Fetch the todo records in the background.
-								return module;
-							});
-						}
-					}
-				};
-
-				$routeProvider
-					.when('/', routeConfig)
-					.when('/:status', routeConfig)
-					.otherwise({
-						redirectTo: '/'
-					});
-			});
-
 	},
 	// Update DOM on a Received Event
 	receivedEvent: function(id) {
@@ -66,3 +38,28 @@ var app = {
 };
 
 app.initialize();
+
+angular.module('contacts', ['ngRoute'])
+	.config(function ($routeProvider) {
+		'use strict';
+
+		var routeConfig = {
+			controller: 'ContactCtrl',
+			templateUrl: 'contacts-index.html',
+			resolve: {
+				store: function (contactStorage) {
+					// Get the correct module (API or localStorage).
+					return contactStorage.then(function (module) {
+						module.get(); // Fetch the todo records in the background.
+						return module;
+					});
+				}
+			}
+		};
+
+		$routeProvider
+			.when('/', routeConfig)
+			.otherwise({
+				redirectTo: '/'
+			});
+	});

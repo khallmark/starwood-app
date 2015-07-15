@@ -101,25 +101,6 @@ angular.module('todomvc')
 			store.put(todo);
 		};
 
-		$scope.toggleCompleted = function (todo, completed) {
-			if (angular.isDefined(completed)) {
-				todo.completed = completed;
-			}
-			store.put(todo, todos.indexOf(todo))
-				.then(function success() {}, function error() {
-					todo.completed = !todo.completed;
-				});
-		};
 
-		$scope.clearCompletedTodos = function () {
-			store.clearCompleted();
-		};
 
-		$scope.markAll = function (completed) {
-			todos.forEach(function (todo) {
-				if (todo.completed !== completed) {
-					$scope.toggleCompleted(todo, completed);
-				}
-			});
-		};
 	});

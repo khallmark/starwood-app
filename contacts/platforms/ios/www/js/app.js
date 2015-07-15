@@ -39,17 +39,17 @@ var app = {
 
 app.initialize();
 
-angular.module('todomvc', ['ngRoute'])
+angular.module('contacts', ['ngRoute'])
 	.config(function ($routeProvider) {
 		'use strict';
 
 		var routeConfig = {
-			controller: 'TodoCtrl',
-			templateUrl: 'todomvc-index.html',
+			controller: 'ContactCtrl',
+			templateUrl: 'contacts-index.html',
 			resolve: {
-				store: function (todoStorage) {
+				store: function (contactStorage) {
 					// Get the correct module (API or localStorage).
-					return todoStorage.then(function (module) {
+					return contactStorage.then(function (module) {
 						module.get(); // Fetch the todo records in the background.
 						return module;
 					});
@@ -59,7 +59,6 @@ angular.module('todomvc', ['ngRoute'])
 
 		$routeProvider
 			.when('/', routeConfig)
-			.when('/:status', routeConfig)
 			.otherwise({
 				redirectTo: '/'
 			});

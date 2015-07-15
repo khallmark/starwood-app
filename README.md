@@ -8,4 +8,6 @@ sudo npm install -g bower
 sudo npm install -g ios-sim
 sudo npm install -g ios-deploy
 sudo npm install -g cordova
+
+bower install
 ```

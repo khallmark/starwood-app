@@ -1,5 +1,7 @@
 # Xcode
 #
+bower_components
+.idea
 .DS_Store
 build/
 *.pbxuser

@@ -1,0 +1,22 @@
+{
+  "name": "todo",
+  "version": "0.0.0",
+  "homepage": "https://github.com/khallmark/starwood-app",
+  "authors": [
+    "Kevin Hallmark <kevin.hallmark@littleblackhat.com>"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "angular": "~1.4.3",
+    "angular-route": "~1.4.3",
+    "bootstrap": "~3.3.5",
+    "ng-cordova": "~0.0.3"
+  }
+}

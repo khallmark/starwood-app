@@ -1,21 +1,31 @@
 
 angular.module('contacts')
-	.factory('contactStorage', function ($http, $injector) {
+	.factory('contactStorage', function ($q, $injector) {
 		'use strict';
 
-		// Detect if an API backend is present. If so, return the API module, else
-		// hand off the localStorage adapter
-		return $http.get('/api')
-			.then(function () {
-				return $injector.get('api');
-			}, function () {
-				return $injector.get('localStorage');
-			});
+		var wait = function() {
+			var deferred = $q.defer();
+			deferred.resolve(true);
+			return deferred.promise;
+		};
+
+		var promise = wait();
+
+		promise = promise.then(function () {
+			return $injector.get('localStorage');
+		});
+
+		return promise;
 	})
 	.factory('localStorage', function ($q) {
 		'use strict';
 
 		var STORAGE_ID = 'contacts-angularjs';
+
+		function generateId() {
+			var d = new Date();
+			return d.getTime();
+		}
 
 		var store = {
 			contacts: [],
@@ -38,7 +48,6 @@ angular.module('contacts')
 
 				return deferred.promise;
 			},
-
 			get: function () {
 				var deferred = $q.defer();
 
@@ -49,6 +58,9 @@ angular.module('contacts')
 			},
 
 			insert: function (contact) {
+
+				contact.id = store.contacts.length + 1;
+
 				var deferred = $q.defer();
 
 				store.contacts.push(contact);

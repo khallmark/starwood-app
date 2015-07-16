@@ -1,16 +1,21 @@
 
 angular.module('contacts')
-	.factory('contactStorage', function ($http, $injector) {
+	.factory('contactStorage', function ($q, $injector) {
 		'use strict';
 
-		// Detect if an API backend is present. If so, return the API module, else
-		// hand off the localStorage adapter
-		return $http.get('/api')
-			.then(function () {
-				return $injector.get('api');
-			}, function () {
-				return $injector.get('localStorage');
-			});
+		var wait = function() {
+			var deferred = $q.defer();
+			deferred.resolve(true);
+			return deferred.promise;
+		};
+
+		var promise = wait();
+
+		promise = promise.then(function () {
+			return $injector.get('localStorage');
+		});
+
+		return promise;
 	})
 	.factory('localStorage', function ($q) {
 		'use strict';

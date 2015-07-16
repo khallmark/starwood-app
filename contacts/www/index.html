@@ -12,7 +12,7 @@
 
     <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
         <div class="container">
-            <div class="navbar-header">
+            <div class="navbar-header status-bar">
 
                 <!-- note the ng-init and ng-click here: -->
                 <button type="button" class="navbar-toggle" ng-init="navCollapsed = true" ng-click="navCollapsed = !navCollapsed">
@@ -36,7 +36,7 @@
         <div ng-view class="view-frame"></div>
     </section>
 
-<!--<script type="text/javascript" src="cordova.js"></script>-->
+    <script type="text/javascript" src="cordova.js"></script>
     <script src="bower_components/jquery/dist/jquery.js"></script>
 
     <script src="bower_components/angular/angular.js"></script>

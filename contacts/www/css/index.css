@@ -1,5 +1,5 @@
 section.container {
-    margin-top: 70px;
+    margin-top: 100px;
 }
 
 .nav, .pagination, .carousel, .panel-title a { cursor: pointer; }
@@ -10,6 +10,9 @@ h1 {
     margin-bottom: 30px !important;
 }
 
+.status-bar {
+    margin-top: 20px;
+}
 #contact-list {
     list-style-type: none;
     margin: 0;

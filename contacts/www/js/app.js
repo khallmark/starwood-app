@@ -22,23 +22,10 @@ var app = {
 	// The scope of 'this' is the event. In order to call the 'receivedEvent'
 	// function, we must explicitly call 'app.receivedEvent(...);'
 	onDeviceReady: function() {
-		app.receivedEvent('deviceready');
-	},
-	// Update DOM on a Received Event
-	receivedEvent: function(id) {
-		var parentElement = document.getElementById(id);
-		var listeningElement = parentElement.querySelector('.listening');
-		var receivedElement = parentElement.querySelector('.received');
-
-		listeningElement.setAttribute('style', 'display:none;');
-		receivedElement.setAttribute('style', 'display:block;');
-
-		console.log('Received Event: ' + id);
 	}
 };
 
 app.initialize();
-
 
 angular.module('contacts', ['ngRoute', 'ui.bootstrap'])
 	.config(function ($routeProvider) {
@@ -48,7 +35,7 @@ angular.module('contacts', ['ngRoute', 'ui.bootstrap'])
 			store: function (contactStorage) {
 				// Get the correct module (API or localStorage).
 				return contactStorage.then(function (module) {
-					module.get(); // Fetch the todo records in the background.
+					module.get();
 					return module;
 				});
 			}
@@ -61,8 +48,8 @@ angular.module('contacts', ['ngRoute', 'ui.bootstrap'])
 				resolve: resolve
 			})
 			.when('/create', {
-				controller: 'ContactCtrl',
-				templateUrl: 'partials/contact-create.html',
+				controller: 'ContactDetailCtrl',
+				templateUrl: 'partials/contact-edit.html',
 				resolve: resolve
 			})
 			.when('/edit/:id', {
@@ -73,4 +60,5 @@ angular.module('contacts', ['ngRoute', 'ui.bootstrap'])
 			.otherwise({
 				redirectTo: '/'
 			});
-	});
+	}
+);

@@ -6,41 +6,56 @@
  * - exposes the model to the template and provides event handlers
  */
 angular.module('contacts')
-	.controller('ContactCtrl', function ContactCtrl($scope, $routeParams, $filter, store) {
+	.controller(
+		'ContactCtrl',
+		['$scope', '$routeParams','$filter', 'store', '$location',
+		function ($scope, $routeParams, $filter, store, $location) {
 		'use strict';
+
 
 		var contacts = $scope.contacts = store.contacts;
 
-		$scope.newContactFirst = '';
-		$scope.newContactLast = '';
+
+		$scope.newContact = {};
 
 		$scope.editedContact = null;
 
 		$scope.addContact = function () {
 			var newContact = {
-				firstName: $scope.newContactFirst.trim(),
-				lastName: $scope.newContactLast.trim()
+				firstName: $scope.newContact.firstName.trim(),
+				lastName: $scope.newContact.lastName.trim()
 			};
 
-			if (!newContact.title) {
+			if (!newContact.firstName) {
+				return;
+			}
+
+			if (!newContact.lastName) {
 				return;
 			}
 
 			$scope.saving = true;
 			store.insert(newContact)
 				.then(function success() {
-					$scope.newContactFirst = '';
-					$scope.newContactLast = '';
+					$scope.newContact = {};
 				})
 				.finally(function () {
 					$scope.saving = false;
+					$location.path("/");
 				});
 		};
 
-		$scope.editContact = function (todo) {
-			$scope.editedContact = todo;
+		$scope.cancelCreateContact = function() {
+			$scope.newContact = {};
+			$location.path("/");
+		};
+
+		$scope.editContact = function (contact) {
+			$scope.editedContact = contact;
 			// Clone the original todo to restore it on demand.
-			$scope.originalContact = angular.extend({}, todo);
+			$scope.originalContact = angular.extend({}, contact);
+
+			$location.path("/edit");
 		};
 
 		$scope.saveEdits = function (todo, event) {
@@ -92,4 +107,4 @@ angular.module('contacts')
 
 
 
-	});
+	}]);

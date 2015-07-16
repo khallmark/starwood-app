@@ -4,41 +4,50 @@
     <meta charset="utf-8">
     <title>AngularJS • TodoMVC</title>
     <link rel="stylesheet" href="css/index.css">
+    <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.css">
     <style>[ng-cloak] { display: none; }</style>
 </head>
-<body ng-app="contacts">
-<ng-view />
 
-<script type="text/ng-template" id="contacts-index.html">
-    <section id="contactapp">
-        <header id="header">
-            <form id="contact-form" ng-submit="addContact()">
-                <input id="new-contact" placeholder="Enter Task" ng-model="newContact" ng-disabled="saving" autofocus>
-            </form>
-        </header>
-        <section id="main" ng-show="contacts.length" ng-cloak>
-            <ul id="contact-list">
-                <li ng-repeat="contact in contacts | filter:statusFilter track by $index" ng-class="{completed: contact.completed, editing: contact == editedContact}">
-                    <div class="view">
-                        <input class="toggle" type="checkbox" ng-model="contact.completed">
-                        <label ng-dblclick="editContact(contact)">{{contact.title}}</label>
-                        <button class="destroy" ng-click="removeContact(contact)"></button>
-                    </div>
-                    <form ng-submit="saveEdits(contact, 'submit')">
-                        <input class="edit" ng-trim="false" ng-model="contact.title" contact-escape="revertEdits(contact)" ng-blur="saveEdits(contact, 'blur')" contact-focus="contact == editedContact">
-                    </form>
-                </li>
-            </ul>
-        </section>
+<body ng-app="contacts">
+
+    <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
+        <div class="container">
+            <div class="navbar-header status-bar">
+
+                <!-- note the ng-init and ng-click here: -->
+                <button type="button" class="navbar-toggle" ng-init="navCollapsed = true" ng-click="navCollapsed = !navCollapsed">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="#/">Contacts</a>
+            </div>
+
+            <div class="collapse navbar-collapse" collapse="navCollapsed">
+                <ul class="nav navbar-nav navbar-right">
+                    <li><a href="#/create">Create</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <section class="container">
+        <div ng-view class="view-frame"></div>
     </section>
-    <footer id="info">
-    </footer>
-</script>
-<!--<script type="text/javascript" src="cordova.js"></script>-->
-<script src="bower_components/angular/angular.js"></script>
-<script src="bower_components/angular-route/angular-route.js"></script>
-<script src="js/app.js"></script>
-<script src="js/controllers/contactCtrl.js"></script>
-<script src="js/services/contactStorage.js"></script>
+
+    <script type="text/javascript" src="cordova.js"></script>
+    <script src="bower_components/jquery/dist/jquery.js"></script>
+
+    <script src="bower_components/angular/angular.js"></script>
+    <script src="bower_components/angular-route/angular-route.js"></script>
+    <script src="bower_components/angular-bootstrap/ui-bootstrap.js"></script>
+    <script src="bower_components/angular-animate/angular-animate.js"></script>
+
+    <script src="js/app.js"></script>
+    <script src="js/controllers/contactCtrl.js"></script>
+    <script src="js/controllers/contactDetailCtrl.js"></script>
+
+    <script src="js/services/contactStorage.js"></script>
 </body>
 </html>

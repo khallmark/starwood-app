@@ -22,44 +22,43 @@ var app = {
 	// The scope of 'this' is the event. In order to call the 'receivedEvent'
 	// function, we must explicitly call 'app.receivedEvent(...);'
 	onDeviceReady: function() {
-		app.receivedEvent('deviceready');
-	},
-	// Update DOM on a Received Event
-	receivedEvent: function(id) {
-		var parentElement = document.getElementById(id);
-		var listeningElement = parentElement.querySelector('.listening');
-		var receivedElement = parentElement.querySelector('.received');
-
-		listeningElement.setAttribute('style', 'display:none;');
-		receivedElement.setAttribute('style', 'display:block;');
-
-		console.log('Received Event: ' + id);
 	}
 };
 
 app.initialize();
 
-angular.module('contacts', ['ngRoute'])
+angular.module('contacts', ['ngRoute', 'ui.bootstrap'])
 	.config(function ($routeProvider) {
 		'use strict';
 
-		var routeConfig = {
-			controller: 'ContactCtrl',
-			templateUrl: 'contacts-index.html',
-			resolve: {
-				store: function (contactStorage) {
-					// Get the correct module (API or localStorage).
-					return contactStorage.then(function (module) {
-						module.get(); // Fetch the todo records in the background.
-						return module;
-					});
-				}
+		var resolve =  {
+			store: function (contactStorage) {
+				// Get the correct module (API or localStorage).
+				return contactStorage.then(function (module) {
+					module.get();
+					return module;
+				});
 			}
 		};
 
 		$routeProvider
-			.when('/', routeConfig)
+			.when('/', {
+				controller: 'ContactCtrl',
+				templateUrl: 'partials/contact-list.html',
+				resolve: resolve
+			})
+			.when('/create', {
+				controller: 'ContactDetailCtrl',
+				templateUrl: 'partials/contact-edit.html',
+				resolve: resolve
+			})
+			.when('/edit/:id', {
+				controller: 'ContactDetailCtrl',
+				templateUrl: 'partials/contact-edit.html',
+				resolve: resolve
+			})
 			.otherwise({
 				redirectTo: '/'
 			});
-	});
+	}
+);

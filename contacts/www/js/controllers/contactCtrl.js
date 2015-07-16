@@ -12,26 +12,28 @@ angular.module('contacts')
 
 		var contacts = $scope.contacts = store.contacts;
 
-		$scope.newContactFirst = '';
-		$scope.newContactLast = '';
+		$scope.newContact = {};
 
 		$scope.editedContact = null;
 
 		$scope.addContact = function () {
 			var newContact = {
-				firstName: $scope.newContactFirst.trim(),
-				lastName: $scope.newContactLast.trim()
+				firstName: $scope.newContact.firstName.trim(),
+				lastName: $scope.newContact.lastName.trim()
 			};
 
-			if (!newContact.title) {
+			if (!newContact.firstName) {
+				return;
+			}
+
+			if (!newContact.lastName) {
 				return;
 			}
 
 			$scope.saving = true;
 			store.insert(newContact)
 				.then(function success() {
-					$scope.newContactFirst = '';
-					$scope.newContactLast = '';
+					$scope.newContact = {};
 				})
 				.finally(function () {
 					$scope.saving = false;

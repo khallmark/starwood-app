@@ -43,8 +43,7 @@ angular.module('contacts')
 
 				return deferred.promise;
 			},
-
-			getAll: function () {
+			get: function () {
 				var deferred = $q.defer();
 
 				angular.copy(store._getFromLocalStorage(), store.contacts);
@@ -55,7 +54,8 @@ angular.module('contacts')
 
 			insert: function (contact) {
 
-				contact.id =
+				contact.id = store.contacts.length + 1;
+
 				var deferred = $q.defer();
 
 				store.contacts.push(contact);

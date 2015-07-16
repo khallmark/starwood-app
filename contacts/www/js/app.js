@@ -65,8 +65,8 @@ angular.module('contacts', ['ngRoute', 'ui.bootstrap'])
 				templateUrl: 'partials/contact-create.html',
 				resolve: resolve
 			})
-			.when('/edit', {
-				controller: 'ContactCtrl',
+			.when('/edit/:id', {
+				controller: 'ContactDetailCtrl',
 				templateUrl: 'partials/contact-edit.html',
 				resolve: resolve
 			})

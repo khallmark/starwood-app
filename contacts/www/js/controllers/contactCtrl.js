@@ -6,7 +6,11 @@
  * - exposes the model to the template and provides event handlers
  */
 angular.module('contacts')
-	.controller('ContactCtrl', function ContactCtrl($scope, $routeParams, $filter, store) {
+	.controller('ContactCtrl', ['$scope', '$routeParams','$filter', 'store', '$location',
+		function ($scope, $routeParams, $filter, store, $location)
+
+
+		 {
 		'use strict';
 
 
@@ -95,4 +99,4 @@ angular.module('contacts')
 
 
 
-	});
+	}]);

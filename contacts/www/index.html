@@ -57,26 +57,24 @@
 
 <script type="text/ng-template" id="contacts-index.html">
     <section id="contactapp">
-        <header id="header">
-            Contacts
-        </header>
         <section id="main" ng-show="contacts.length" ng-cloak>
             <ul id="contact-list">
-                <li ng-repeat="contact in contacts" ng-class="{completed: contact.completed}">
-                    <div class="view">
-                        <input class="toggle" type="checkbox" ng-model="contact.completed">
-                        <label ng-dblclick="editContact(contact)">{{contact.firstName}}</label>
-                        <button class="destroy" ng-click="removeContact(contact)"></button>
-                    </div>
-                    <form ng-submit="saveEdits(contact, 'submit')">
-                        <input class="edit" ng-trim="false" ng-model="contact.title" contact-escape="revertEdits(contact)" ng-blur="saveEdits(contact, 'blur')" contact-focus="contact == editedContact">
-                    </form>
+                <li ng-repeat="contact in contacts">
+                    <a href="#/edit">
+                        <div class="view">
+                            <img src="http://www.lorempixel.com/40/40" />
+                            {{contact.firstName}} <strong>{{contact.lastName}}</strong>
+                        </div>
+                    </a>
                 </li>
             </ul>
         </section>
+        <section id="main" ng-show="!contacts.length" ng-cloak>
+            <ul id="contact-list">
+                <li><p>No Contacts. Why don't you <a href="#/create">Create</a> one.</p></li>
+            </ul>
+        </section>
     </section>
-    <footer id="info">
-    </footer>
 </script>
 <!--<script type="text/javascript" src="cordova.js"></script>-->
 <script src="bower_components/angular/angular.js"></script>

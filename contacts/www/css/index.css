@@ -2,3 +2,21 @@ section.container {
 }
 
 .nav, .pagination, .carousel, .panel-title a { cursor: pointer; }
+
+#contact-list {
+
+}
+
+#contact-list {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+}
+
+#contact-list li {
+    border: 1px solid #CCCCCC;
+    list-style-type: none;
+    margin: 0;
+    padding: 10px;
+    width: 100%;
+}

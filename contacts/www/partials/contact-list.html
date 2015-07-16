@@ -1,8 +1,8 @@
 <section id="contactapp">
     <section id="main" ng-show="contacts.length" ng-cloak>
         <ul id="contact-list">
-            <li ng-show="contacts.length" ng-repeat="contact in contacts">
-                <a href="#/edit/{{contact.id}}">
+            <li ng-show="contacts.length" ng-repeat="contact in contacts track by $index">
+                <a href="#/edit/{{$index}}">
                     <div class="view">
                         <img src="http://www.lorempixel.com/40/40" />
                         {{contact.firstName}} <strong>{{contact.lastName}}</strong>

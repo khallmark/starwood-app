@@ -15,6 +15,7 @@ angular.module('contacts')
 
 		var contacts = $scope.contacts = store.contacts;
 
+
 		$scope.newContact = {};
 
 		$scope.editedContact = null;

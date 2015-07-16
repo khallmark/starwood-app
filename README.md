@@ -1,4 +1,4 @@
-# starwood-app
+# contacts-angular-cordova-demo-app
 
 These instructions assume you have xcode, node, and npm installed. 
 

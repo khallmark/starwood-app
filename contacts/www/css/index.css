@@ -1,3 +1,4 @@
-body {
-	padding-top: 50px;
+section.container {
 }
+
+.nav, .pagination, .carousel, .panel-title a { cursor: pointer; }

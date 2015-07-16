@@ -9,6 +9,7 @@ angular.module('contacts')
 	.controller('ContactCtrl', function ContactCtrl($scope, $routeParams, $filter, store) {
 		'use strict';
 
+
 		var contacts = $scope.contacts = store.contacts;
 
 		$scope.newContactFirst = '';

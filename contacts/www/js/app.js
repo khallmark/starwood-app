@@ -39,7 +39,8 @@ var app = {
 
 app.initialize();
 
-angular.module('contacts', ['ngRoute'])
+
+angular.module('contacts', ['ngRoute', 'ui.bootstrap'])
 	.config(function ($routeProvider) {
 		'use strict';
 
@@ -57,8 +58,23 @@ angular.module('contacts', ['ngRoute'])
 			}
 		};
 
+		var createConfig = {
+			controller: 'ContactCtrl',
+			templateUrl: 'contacts-create.html',
+			resolve: {
+				store: function (contactStorage) {
+					// Get the correct module (API or localStorage).
+					return contactStorage.then(function (module) {
+						module.get(); // Fetch the todo records in the background.
+						return module;
+					});
+				}
+			}
+		};
+
 		$routeProvider
 			.when('/', routeConfig)
+			.when('/create', createConfig)
 			.otherwise({
 				redirectTo: '/'
 			});

@@ -1,10 +1,13 @@
 section.container {
+    margin-top: 70px;
 }
 
 .nav, .pagination, .carousel, .panel-title a { cursor: pointer; }
 
-#contact-list {
-
+h1 {
+    font-size: 20px !important;
+    margin-top: 0px !important;
+    margin-bottom: 30px !important;
 }
 
 #contact-list {
@@ -16,7 +19,7 @@ section.container {
 #contact-list li {
     border: 1px solid #CCCCCC;
     list-style-type: none;
-    margin: 0;
+    margin: 0 0 5px 0;
     padding: 10px;
     width: 100%;
 }

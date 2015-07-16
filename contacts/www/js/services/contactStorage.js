@@ -17,6 +17,11 @@ angular.module('contacts')
 
 		var STORAGE_ID = 'contacts-angularjs';
 
+		function generateId() {
+			var d = new Date();
+			return d.getTime();
+		}
+
 		var store = {
 			contacts: [],
 
@@ -39,7 +44,7 @@ angular.module('contacts')
 				return deferred.promise;
 			},
 
-			get: function () {
+			getAll: function () {
 				var deferred = $q.defer();
 
 				angular.copy(store._getFromLocalStorage(), store.contacts);
@@ -49,6 +54,8 @@ angular.module('contacts')
 			},
 
 			insert: function (contact) {
+
+				contact.id =
 				var deferred = $q.defer();
 
 				store.contacts.push(contact);

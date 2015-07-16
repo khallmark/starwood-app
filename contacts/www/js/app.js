@@ -44,37 +44,32 @@ angular.module('contacts', ['ngRoute', 'ui.bootstrap'])
 	.config(function ($routeProvider) {
 		'use strict';
 
-		var routeConfig = {
-			controller: 'ContactCtrl',
-			templateUrl: 'contacts-index.html',
-			resolve: {
-				store: function (contactStorage) {
-					// Get the correct module (API or localStorage).
-					return contactStorage.then(function (module) {
-						module.get(); // Fetch the todo records in the background.
-						return module;
-					});
-				}
-			}
-		};
-
-		var createConfig = {
-			controller: 'ContactCtrl',
-			templateUrl: 'contacts-create.html',
-			resolve: {
-				store: function (contactStorage) {
-					// Get the correct module (API or localStorage).
-					return contactStorage.then(function (module) {
-						module.get(); // Fetch the todo records in the background.
-						return module;
-					});
-				}
+		var resolve =  {
+			store: function (contactStorage) {
+				// Get the correct module (API or localStorage).
+				return contactStorage.then(function (module) {
+					module.get(); // Fetch the todo records in the background.
+					return module;
+				});
 			}
 		};
 
 		$routeProvider
-			.when('/', routeConfig)
-			.when('/create', createConfig)
+			.when('/', {
+				controller: 'ContactCtrl',
+				templateUrl: 'partials/contact-list.html',
+				resolve: resolve
+			})
+			.when('/create', {
+				controller: 'ContactCtrl',
+				templateUrl: 'partials/contact-create.html',
+				resolve: resolve
+			})
+			.when('/edit', {
+				controller: 'ContactCtrl',
+				templateUrl: 'partials/contact-edit.html',
+				resolve: resolve
+			})
 			.otherwise({
 				redirectTo: '/'
 			});

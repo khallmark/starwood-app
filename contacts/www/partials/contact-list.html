@@ -1,0 +1,15 @@
+<section id="contactapp">
+    <section id="main" ng-show="contacts.length" ng-cloak>
+        <ul id="contact-list">
+            <li ng-show="contacts.length" ng-repeat="contact in contacts">
+                <a ng-click="editContact(contact)">
+                    <div class="view">
+                        <img src="http://www.lorempixel.com/40/40" />
+                        {{contact.firstName}} <strong>{{contact.lastName}}</strong>
+                    </div>
+                </a>
+            </li>
+            <li ng-show="!contacts.length" ><p>No Contacts. Why don't you <a href="#/create">Create</a> one.</p></li>
+        </ul>
+    </section>
+</section>
